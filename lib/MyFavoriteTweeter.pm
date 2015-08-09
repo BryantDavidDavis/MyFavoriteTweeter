@@ -1,9 +1,11 @@
 package MyFavoriteTweeter;
 use Dancer2;
 use MySecretKeys;
+use APITransformer;
 use Net::Twitter;
 use Scalar::Util 'blessed';
 use Data::Dumper;
+
 set serializer => 'JSON';
 our $VERSION = '0.1';
 
@@ -25,7 +27,18 @@ prefix '/api/1.0' => sub {
                          "HTTP Message......: ", $err->message, "\n",
                          "Twitter error.....: ", $err->error, "\n";
             }
-            return $r->{statuses};
+
+            my @outputArray;
+
+            for my $status (@{$r->{statuses}}) {
+                push @outputArray, {
+                    text => $status->{text},
+                    created_at => $status->{created_at},
+                    screen_name => $status->{user}{screen_name}
+                    };
+            }
+
+            return {@outputArray};
         };
 
         get '/following-intersection/:one/:two' => sub {
