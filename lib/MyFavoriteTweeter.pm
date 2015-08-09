@@ -28,17 +28,8 @@ prefix '/api/1.0' => sub {
                          "Twitter error.....: ", $err->error, "\n";
             }
 
-            my @outputArray;
-
-            for my $status (@{$r->{statuses}}) {
-                push @outputArray, {
-                    text => $status->{text},
-                    created_at => $status->{created_at},
-                    screen_name => $status->{user}{screen_name}
-                    };
-            }
-
-            return [@outputArray];
+            my @transformedTweets = APITransformer::transform_tweets(@{$r->{statuses}});
+            return [@transformedTweets];
         };
 
         get '/following-intersection/:one/:two' => sub {
