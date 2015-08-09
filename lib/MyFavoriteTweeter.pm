@@ -38,7 +38,7 @@ prefix '/api/1.0' => sub {
                     };
             }
 
-            return {@outputArray};
+            return [@outputArray];
         };
 
         get '/following-intersection/:one/:two' => sub {
