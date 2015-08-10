@@ -18,7 +18,6 @@ my $nt = Net::Twitter->new(
 
 sub get_tweets {
     my ($user_name) = @_;
-
     return $nt->user_timeline({screen_name => $user_name});
 }
 
@@ -37,10 +36,8 @@ sub get_intersection {
         push @ids_two, @{$r->{ids} };
     }
 
-#    print Dumper @ids_two;
     my @ids_array = Array::Utils::intersect(@ids_one, @ids_two);
-    my $names_array = $nt->lookup_users({user_id => @ids_array});
-    return $names_array;
+    return $nt->lookup_users({user_id => [@ids_array]});
 }
 
 1;
