@@ -20,4 +20,11 @@ sub transform_tweets {
     return @outputArray;
 }
 
+sub get_intersection {
+    my (@group_a, @group_b) = @_;
+
+    print Dumper @group_b;
+
+}
+
 1;

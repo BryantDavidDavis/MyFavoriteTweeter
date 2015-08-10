@@ -5,6 +5,7 @@ use APITransformer;
 use Net::Twitter;
 use Scalar::Util 'blessed';
 use Data::Dumper;
+use Array::Utils;
 
 set serializer => 'JSON';
 our $VERSION = '0.1';
@@ -35,8 +36,22 @@ prefix '/api/1.0' => sub {
         get '/following-intersection/:one/:two' => sub {
             my $one_result = $nt->friends_list({screen_name => params->{one}});
             my $two_result = $nt->friends_list({screen_name => params->{two}});
-            return $one_result->{users};
-        }
+
+            my @first_friends;
+            my @second_friends;
+
+            for my $friend (@{$one_result->{users}}) {
+#                print Dumper $friend->{screen_name};
+                push @first_friends, $friend->{screen_name};
+            }
+
+            for my $friend (@{$two_result->{users}}) {
+                push @second_friends, $friend->{screen_name};
+            }
+
+            my @output_array = Array::Utils::intersect(@first_friends, @second_friends);
+            return [@output_array];
+        };
 };
 
 true;
