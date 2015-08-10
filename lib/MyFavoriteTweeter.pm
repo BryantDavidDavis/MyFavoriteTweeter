@@ -34,24 +34,35 @@ prefix '/api/1.0' => sub {
         };
 
         get '/following-intersection/:one/:two' => sub {
-            my $one_result = $nt->friends_list({screen_name => params->{one}});
-            my $two_result = $nt->friends_list({screen_name => params->{two}});
-
-            my @first_friends;
-            my @second_friends;
-
-            for my $friend (@{$one_result->{users}}) {
-#                print Dumper $friend->{screen_name};
-                push @first_friends, $friend->{screen_name};
+            if ( my $err = $@ ) {
+                die $@ unless blessed $err && $err->isa('Net::Twitter::Error');
+                warn "HTTP Response Code: ", $err->code, "\n",
+                     "HTTP Message......: ", $err->message, "\n",
+                     "Twitter error.....: ", $err->error, "\n";
             }
+            my $one_result = $nt->friends_ids({screen_name => params->{one}});
+            my $two_result = $nt->friends_ids({screen_name => params->{two}});
+            my @ids_array = Array::Utils::intersect(@{$one_result->{ids}}, @{$two_result->{ids}});
+            my $names_array = $nt->lookup_users({user_id => @ids_array});
 
-            for my $friend (@{$two_result->{users}}) {
-                push @second_friends, $friend->{screen_name};
-            }
-
-            my @output_array = Array::Utils::intersect(@first_friends, @second_friends);
-            return [@output_array];
+            return [APITransformer::transform_users(@{$names_array})];
         };
 };
 
 true;
+#            print Dumper @{$one_result->{ids}};
+#            print Dumper @{$two_result->{ids}};
+#            my $one_result = $nt->friends_list({screen_name => params->{one}});
+#            my $two_result = $nt->friends_list({screen_name => params->{two}});
+#
+#            my @first_friends;
+#            my @second_friends;
+#
+#            for my $friend (@{$one_result->{users}}) {
+##                print Dumper $friend->{screen_name};
+#                push @first_friends, $friend->{screen_name};
+#            }
+#
+#            for my $friend (@{$two_result->{users}}) {
+#                push @second_friends, $friend->{screen_name};
+#            }
