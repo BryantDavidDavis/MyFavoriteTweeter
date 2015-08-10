@@ -7,6 +7,7 @@ use Scalar::Util 'blessed';
 use Data::Dumper;
 use Array::Utils;
 
+#authentication_keys belong in $ENV variables
 my $nt = Net::Twitter->new(
     traits   => [qw/API::RESTv1_1/],
     consumer_key        => $MySecretKeys::consumer_key,
@@ -14,6 +15,12 @@ my $nt = Net::Twitter->new(
     access_token        => $MySecretKeys::access_token,
     access_token_secret => $MySecretKeys::access_token_secret,
 );
+
+sub get_tweets {
+    my ($user_name) = @_;
+
+    return $nt->user_timeline({screen_name => $user_name});
+}
 
 sub get_intersection {
     my ($user_one, $user_two) = @_;
@@ -34,7 +41,6 @@ sub get_intersection {
     my @ids_array = Array::Utils::intersect(@ids_one, @ids_two);
     my $names_array = $nt->lookup_users({user_id => @ids_array});
     return $names_array;
-
 }
 
 1;
