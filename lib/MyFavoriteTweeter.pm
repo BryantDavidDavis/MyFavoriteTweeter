@@ -6,6 +6,7 @@ use Net::Twitter;
 use Scalar::Util 'blessed';
 use Data::Dumper;
 use Array::Utils;
+use TwitterHandler;
 
 set serializer => 'JSON';
 our $VERSION = '0.1';
@@ -34,17 +35,15 @@ prefix '/api/1.0' => sub {
         };
 
         get '/following-intersection/:one/:two' => sub {
+
             if ( my $err = $@ ) {
                 die $@ unless blessed $err && $err->isa('Net::Twitter::Error');
                 warn "HTTP Response Code: ", $err->code, "\n",
                      "HTTP Message......: ", $err->message, "\n",
                      "Twitter error.....: ", $err->error, "\n";
             }
-            my $one_result = $nt->friends_ids({screen_name => params->{one}});
-            my $two_result = $nt->friends_ids({screen_name => params->{two}});
-            my @ids_array = Array::Utils::intersect(@{$one_result->{ids}}, @{$two_result->{ids}});
-            my $names_array = $nt->lookup_users({user_id => @ids_array});
 
+            my $names_array = TwitterHandler::get_intersection(params->{one}, params->{two});
             return [APITransformer::transform_users(@{$names_array})];
         };
 };
