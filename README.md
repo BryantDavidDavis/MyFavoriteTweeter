@@ -46,5 +46,5 @@ our $access_token_secret = 'blablabla';
 </br>
 Of course it is probably better to store these as $ENV variables if you wish
 
-7. Now simply serve your project with from the port of your choosing with the command:
+Now simply serve your project with from the port of your choosing with the command:
   carton exec starman -p 8080 MyFavoriteTweeter.psgi
