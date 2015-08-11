@@ -26,24 +26,15 @@ In order to Deploy this App on a Linux Distrobution such as Ubuntu 14.04 (which 
   $ sudo apt-get update
   $ sudo apt-get upgrade
   $ sudo apt-get install build-essential</li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-</ol>
-1. first clone this git repo into the directory of your choosing on your server
-2. In order to install a c compiler, run:
-  $ sudo apt-get update
-  $ sudo apt-get upgrade
-  $ sudo apt-get install build-essential
-3. next you should install support for the cpan module SLLeay by running:
-  $ sudo apt-get install libssl-dev
-4. next you can follow this tutorial on setting up carton to manage your perl dependencies
+  <li>next you should install support for the cpan module SLLeay by running:
+  $ sudo apt-get install libssl-dev</li>
+  <li>next you can follow this tutorial on setting up carton to manage your perl dependencies
   http://kappataumu.com/articles/modern-perl-toolchain-for-web-apps.html
-  This will ensure that you have the tools necessary to install the project dependecies.
-5. now run carton install to install your dependencies (google any error messages that occur during installation :))
-6. now you must create a file called MySecretKeys.pm to store you application's Twitter authentication keys
-The file should look like this:
+  This will ensure that you have the tools necessary to install the project dependecies.</li>
+  <li>now run carton install to install your dependencies (google any error messages that occur during installation :))</li>
+  <li>now you must create a file called MySecretKeys.pm to store you application's Twitter authentication keys
+The file should look like this:</li>
+</ol>
 <div>
 
 <p>package MySecretKeys;</p>
