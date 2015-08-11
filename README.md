@@ -31,7 +31,7 @@ In order to Deploy this App on a Linux Distrobution such as Ubuntu 14.04 (which 
   This will ensure that you have the tools necessary to install the project dependecies.
 5. now run carton install to install your dependencies (google any error messages that occur during installation :))
 6. now you must create a file called MySecretKeys.pm to store you application's Twitter authentication keys
-  The file should look like this:
+<div>The file should look like this:
 package MySecretKeys;
 use strict 'vars';
 use warnings;
@@ -40,7 +40,7 @@ our $consumer_key = 'blablabla';
 our $consumer_secret = 'blablabla';
 our $access_token = 'balbalbal';
 our $access_token_secret = 'blablabla';
-
+</div>
 Of course it is probably better to store these as $ENV variables if you wish
 
 7. Now simply serve your project with from the port of your choosing with the command:
