@@ -33,9 +33,10 @@ In order to Deploy this App on a Linux Distrobution such as Ubuntu 14.04 (which 
 6. now you must create a file called MySecretKeys.pm to store you application's Twitter authentication keys
 The file should look like this:
 <div>
-package MySecretKeys;
-use strict 'vars';
-use warnings;
+
+<p>package MySecretKeys;</p>
+<p>use strict 'vars';</p>
+<p>use warnings;</p>
 
 our $consumer_key = 'blablabla';
 our $consumer_secret = 'blablabla';
