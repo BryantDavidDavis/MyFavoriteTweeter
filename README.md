@@ -10,6 +10,7 @@ This is version 1.0 of the MyFavoriteTweeter API.  This version of the API has t
   http://50.116.0.57:6500/api/1.0/intersection/userA/userB
   
 The results are returned as JSON.
+</hr>
 
 Note:
   The Twitter API rate limits, which means that during a 15 minute window this API can only make a certain number of requests.
