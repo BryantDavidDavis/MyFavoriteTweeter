@@ -20,6 +20,17 @@ Note:
 Build Instructions:
 
 In order to Deploy this App on a Linux Distrobution such as Ubuntu 14.04 (which is what this API is running on), one must ensure that they have installed the appropriate perl dependencies first.  This app was deployed on a fresh Ubuntu 14.04 distrobution by following these steps:
+<ol>
+  <li>first clone this git repo into the directory of your choosing on your server</li>
+  <li>In order to install a c compiler, run:
+  $ sudo apt-get update
+  $ sudo apt-get upgrade
+  $ sudo apt-get install build-essential</li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ol>
 1. first clone this git repo into the directory of your choosing on your server
 2. In order to install a c compiler, run:
   $ sudo apt-get update
