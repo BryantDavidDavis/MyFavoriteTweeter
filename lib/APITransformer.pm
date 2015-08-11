@@ -25,10 +25,8 @@ sub transform_users {
 
     my @output_array;
 
-
-
     for my $user (@users) {
-        print Dumper $user;
+
         push @output_array, {
             screen_name => $user->{screen_name}
         };

@@ -30,7 +30,7 @@ sub get_intersection {
     my $ids_one = $nt->friends_ids({screen_name => $user_one});
     my $ids_two = $nt->friends_ids({screen_name => $user_two});
     my @ids_array = Array::Utils::intersect(@{$ids_one}, @{$ids_two});
-    
+
     return $nt->lookup_users({user_id => [@ids_array]});
 }
 
